@@ -46,9 +46,7 @@ jobs:
         working-directory: ./infra
       - name: Terraform plan
         working-directory: ./infra
-        run: |
-          terraform plan \
-          -out=tf.plan
+        run: terraform plan 
 
   apply:
     needs: lint
@@ -66,11 +64,10 @@ jobs:
         working-directory: ./infra
       - name: Terraform Apply
         working-directory: ./infra
-        run: |
-          terraform apply \
-          -auto-approve \
+        run: terraform apply -auto-approve 
 
   destroy:
+    needs: lint
     runs-on: ubuntu-latest
     if: |
       github.ref == 'feature-b' &&
